@@ -33,22 +33,7 @@ class AuthViewModel extends BaseViewModel {
         authDataSource.login(username, password)
             .subscribeOn(Schedulers.io())
             .doOnSubscribe(compositeDisposable::add)
-            .subscribeWith(new CallbackWrapper<User>(new ErrorHandler() {
-                @Override
-                public void onUnknownError(String errorMessage) {
-
-                }
-
-                @Override
-                public void onTimeout() {
-
-                }
-
-                @Override
-                public void onNetworkError() {
-
-                }
-            }) {
+            .subscribeWith(new CallbackWrapper<User>(errorHandler) {
 
                 @Override
                 protected void onSuccess(User user) {
@@ -61,22 +46,7 @@ class AuthViewModel extends BaseViewModel {
         authDataSource.getUserList()
             .subscribeOn(Schedulers.io())
             .doOnSubscribe(compositeDisposable::add)
-            .subscribeWith(new CallbackWrapper<List<User>>(new ErrorHandler() {
-                @Override
-                public void onUnknownError(String errorMessage) {
-
-                }
-
-                @Override
-                public void onTimeout() {
-
-                }
-
-                @Override
-                public void onNetworkError() {
-
-                }
-            }) {
+            .subscribeWith(new CallbackWrapper<List<User>>(errorHandler) {
 
                 @Override
                 protected void onSuccess(List<User> userList) {

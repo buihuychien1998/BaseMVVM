@@ -1,7 +1,9 @@
 package com.example.baseapplication.common.utils;
 
+import com.example.baseapplication.common.error.BusinessError;
 import com.example.baseapplication.common.error.ErrorHandler;
 import com.example.baseapplication.common.error.ErrorModel;
+import com.example.baseapplication.common.error.HttpError;
 import com.example.baseapplication.model.base.BaseResponse;
 
 import org.jetbrains.annotations.NotNull;
@@ -34,16 +36,16 @@ public abstract class CallbackWrapper<T> extends DisposableObserver<T> {
 
     @Override
     public void onError(@NotNull Throwable e) {
-        ErrorHandler view = weakReference.get();
+        ErrorHandler errorHandler = weakReference.get();
         if (e instanceof HttpException) {
             ResponseBody responseBody = ((HttpException) e).response().errorBody();
-            view.onUnknownError(getErrorMessage(responseBody));
+            errorHandler.onHttpError(new HttpError(getErrorMessage(responseBody)));
         } else if (e instanceof SocketTimeoutException) {
-            view.onTimeout();
+            errorHandler.onTimeout();
         } else if (e instanceof IOException) {
-            view.onNetworkError();
+            errorHandler.onNetworkError();
         } else {
-            view.onUnknownError(e.getMessage());
+            errorHandler.onUnknownError(new BusinessError(e.getMessage()));
         }
     }
 

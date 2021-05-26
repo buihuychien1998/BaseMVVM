@@ -29,7 +29,7 @@ public class NetworkModule {
      * @Provides annotation is used for provide dependency of third party library
      * @Binds annotation is used for binding an interface with implementation
      */
-    private static String BASE_URL = "https://api.github.com/";
+    private static final String BASE_URL = "https://api.github.com/";
 
     @Provides
     @Singleton
