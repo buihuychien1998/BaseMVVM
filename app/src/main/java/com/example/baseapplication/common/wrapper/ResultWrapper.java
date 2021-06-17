@@ -1,4 +1,4 @@
-package com.example.baseapplication.common.utils;
+package com.example.baseapplication.common.wrapper;
 
 import com.example.baseapplication.common.result.Result;
 

@@ -18,6 +18,24 @@ public abstract class BaseActivity<DB extends ViewDataBinding, VM extends ViewMo
     protected VM viewModel;
     protected SharedViewModel sharedViewModel;
 
+    public abstract void initViewModel();
+
+    public abstract int getLayoutId();
+
+    /**
+     * Initialize views
+     *
+     * @param savedInstanceState
+     */
+    public abstract void initViews(Bundle savedInstanceState);
+
+    public abstract void initObservers();
+
+    /**
+     * Initialize listeners
+     */
+    public abstract void initListeners();
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,8 +51,6 @@ public abstract class BaseActivity<DB extends ViewDataBinding, VM extends ViewMo
         sharedViewModel = new ViewModelProvider(this).get(SharedViewModel.class);
     }
 
-    public abstract void initViewModel();
-
     /**
      * This function to get ViewModel
      *
@@ -44,22 +60,6 @@ public abstract class BaseActivity<DB extends ViewDataBinding, VM extends ViewMo
     protected VM getViewModel(Class<VM> clazz) {
         return new ViewModelProvider(this).get(clazz);
     }
-
-    public abstract void initObservers();
-
-    public abstract int getLayoutId();
-
-    /**
-     * Initialize views
-     *
-     * @param savedInstanceState
-     */
-    public abstract void initViews(Bundle savedInstanceState);
-
-    /**
-     * Initialize listeners
-     */
-    public abstract void initListeners();
 
     /**
      * This function is used to show soft keyboard

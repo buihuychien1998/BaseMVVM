@@ -21,6 +21,23 @@ public abstract class BaseFragment<DB extends ViewDataBinding, VM extends ViewMo
     protected VM viewModel;
     protected SharedViewModel sharedViewModel;
 
+    public abstract int getLayoutId();
+
+    public abstract void initViewModel();
+
+    /**
+     * Initialize views
+     */
+    public abstract void initViews();
+
+    public abstract void initObservers();
+
+    /**
+     * Initialize listeners
+     */
+    public abstract void initListeners();
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -34,10 +51,9 @@ public abstract class BaseFragment<DB extends ViewDataBinding, VM extends ViewMo
         initViewModel();
         initSharedViewModel();
         initViews();
+        initObservers();
         initListeners();
     }
-
-    public abstract void initViewModel();
 
     private void initSharedViewModel() {
         sharedViewModel = new ViewModelProvider(this).get(SharedViewModel.class);
@@ -66,17 +82,6 @@ public abstract class BaseFragment<DB extends ViewDataBinding, VM extends ViewMo
         return parentViewModel;
     }
 
-    public abstract int getLayoutId();
-
-    /**
-     * Initialize views
-     */
-    public abstract void initViews();
-
-    /**
-     * Initialize listeners
-     */
-    public abstract void initListeners();
 
     /**
      * This function is used to show soft keyboard

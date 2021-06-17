@@ -2,8 +2,7 @@ package com.example.baseapplication.presentation.ui.auth;
 
 import android.util.Log;
 
-import com.example.baseapplication.common.error.ErrorHandler;
-import com.example.baseapplication.common.utils.CallbackWrapper;
+import com.example.baseapplication.common.wrapper.CallbackWrapper;
 import com.example.baseapplication.model.User;
 import com.example.baseapplication.presentation.base.BaseViewModel;
 import com.example.baseapplication.repository.remote.AuthDataSource;
