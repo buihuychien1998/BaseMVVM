@@ -3,7 +3,7 @@ package com.example.baseapplication.di.module;
 import com.example.baseapplication.BuildConfig;
 import com.example.baseapplication.di.annotation.NetworkInterceptor;
 import com.example.baseapplication.di.annotation.OkHttpClientNetwork;
-import com.example.baseapplication.repository.ApiService;
+import com.example.baseapplication.data.ApiService;
 import com.google.gson.Gson;
 
 import java.util.concurrent.TimeUnit;

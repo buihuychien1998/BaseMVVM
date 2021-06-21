@@ -1,7 +1,7 @@
 package com.example.baseapplication.di.module;
 
-import com.example.baseapplication.repository.remote.AuthDataSource;
-import com.example.baseapplication.repository.remote.AuthRepository;
+import com.example.baseapplication.data.remote.AuthDataSource;
+import com.example.baseapplication.data.remote.AuthRepository;
 
 import javax.inject.Singleton;
 

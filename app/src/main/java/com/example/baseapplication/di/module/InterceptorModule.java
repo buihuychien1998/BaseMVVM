@@ -1,6 +1,6 @@
 package com.example.baseapplication.di.module;
 
-import com.example.baseapplication.repository.remote.config.CustomInterceptor;
+import com.example.baseapplication.data.remote.config.CustomInterceptor;
 import com.example.baseapplication.di.annotation.NetworkInterceptor;
 
 import javax.inject.Singleton;

@@ -1,8 +1,7 @@
-package com.example.baseapplication.repository.remote;
+package com.example.baseapplication.data.remote;
 
-import com.example.baseapplication.common.result.Result;
 import com.example.baseapplication.model.User;
-import com.example.baseapplication.repository.ApiService;
+import com.example.baseapplication.data.ApiService;
 
 import java.util.List;
 

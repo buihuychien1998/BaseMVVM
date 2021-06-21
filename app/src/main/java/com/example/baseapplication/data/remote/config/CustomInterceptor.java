@@ -1,4 +1,4 @@
-package com.example.baseapplication.repository.remote.config;
+package com.example.baseapplication.data.remote.config;
 
 import java.io.IOException;
 

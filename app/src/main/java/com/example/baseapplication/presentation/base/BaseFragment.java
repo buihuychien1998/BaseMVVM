@@ -145,7 +145,7 @@ public abstract class BaseFragment<DB extends ViewDataBinding, VM extends BaseVi
     }
 
     public void showProgressDialog(@StringRes int messageId) {
-        DialogUtils.showProgressDialog(requireContext(), messageId);
+        showProgressDialog(getString(messageId));
     }
 
     public void dismissProgressDialog() {

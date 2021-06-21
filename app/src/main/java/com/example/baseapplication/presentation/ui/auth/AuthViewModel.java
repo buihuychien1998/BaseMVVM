@@ -5,8 +5,8 @@ import android.util.Log;
 import com.example.baseapplication.common.wrapper.CallbackWrapper;
 import com.example.baseapplication.model.User;
 import com.example.baseapplication.presentation.base.BaseViewModel;
-import com.example.baseapplication.repository.remote.AuthDataSource;
-import com.example.baseapplication.repository.remote.AuthRepository;
+import com.example.baseapplication.data.remote.AuthDataSource;
+import com.example.baseapplication.data.remote.AuthRepository;
 
 import java.util.List;
 

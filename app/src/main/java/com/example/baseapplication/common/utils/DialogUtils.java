@@ -32,10 +32,6 @@ public class DialogUtils {
         tvMessage.setText(message);
     }
 
-    public static void showProgressDialog(Context context, @StringRes int messageId) {
-       showProgressDialog(context, context.getString(messageId));
-    }
-
     public static void dismissProgressDialog() {
         if (progressDialog != null && progressDialog.isShowing()) {
             progressDialog.dismiss();

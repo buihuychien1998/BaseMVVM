@@ -123,7 +123,7 @@ public abstract class BaseActivity<DB extends ViewDataBinding, VM extends BaseVi
     }
 
     public void showProgressDialog(@StringRes int messageId){
-        DialogUtils.showProgressDialog(this, messageId);
+        showProgressDialog(getString(messageId));
     }
 
     public void dismissProgressDialog(){
