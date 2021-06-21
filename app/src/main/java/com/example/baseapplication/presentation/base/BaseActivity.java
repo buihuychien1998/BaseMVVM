@@ -4,16 +4,20 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
+
+import com.example.baseapplication.R;
+import com.example.baseapplication.common.utils.DialogUtils;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-public abstract class BaseActivity<DB extends ViewDataBinding, VM extends ViewModel>
-    extends AppCompatActivity implements View.OnClickListener{
+public abstract class BaseActivity<DB extends ViewDataBinding, VM extends BaseViewModel>
+    extends AppCompatActivity implements View.OnClickListener {
     protected DB viewBinding;
     protected VM viewModel;
     protected SharedViewModel sharedViewModel;
@@ -43,9 +47,32 @@ public abstract class BaseActivity<DB extends ViewDataBinding, VM extends ViewMo
         initViewModel();
         initSharedViewModel();
         initViews(savedInstanceState);
+        initBaseObservers();
         initObservers();
         initListeners();
     }
+
+    private void initBaseObservers() {
+        viewModel.getErrorModelLiveData().observe(this, errorModel -> {
+            if (errorModel.getMessage() == null) {
+                Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            Toast.makeText(this, errorModel.getMessage(), Toast.LENGTH_SHORT).show();
+        });
+
+        viewModel.getIsLoading().observe(this, isLoading -> {
+            if (isLoading == null) {
+                return;
+            }
+            if (isLoading) {
+                showProgressDialog(R.string.app_name);
+                return;
+            }
+            dismissProgressDialog();
+        });
+    }
+
 
     private void initSharedViewModel() {
         sharedViewModel = new ViewModelProvider(this).get(SharedViewModel.class);
@@ -86,8 +113,20 @@ public abstract class BaseActivity<DB extends ViewDataBinding, VM extends ViewMo
         View view = getCurrentFocus();
         if (view == null) {
 //            inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_NOT_ALWAYS, 0);
-        } else {
-            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            return;
         }
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    public void showProgressDialog(String message){
+        DialogUtils.showProgressDialog(this, message);
+    }
+
+    public void showProgressDialog(@StringRes int messageId){
+        DialogUtils.showProgressDialog(this, messageId);
+    }
+
+    public void dismissProgressDialog(){
+        DialogUtils.dismissProgressDialog();
     }
 }

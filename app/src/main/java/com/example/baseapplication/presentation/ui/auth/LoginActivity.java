@@ -26,14 +26,6 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, AuthViewMo
             }
             Toast.makeText(this, user.toString(), Toast.LENGTH_SHORT).show();
         });
-
-        viewModel.getErrorModelLiveData().observe(this, errorModel -> {
-            if (errorModel.getMessage() == null) {
-                Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            Toast.makeText(this, errorModel.getMessage(), Toast.LENGTH_SHORT).show();
-        });
     }
 
     @Override

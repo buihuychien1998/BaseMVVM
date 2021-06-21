@@ -12,7 +12,8 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 public class BaseViewModel extends ViewModel {
 
-    public final MutableLiveData<ErrorModel> errorModelLiveData = new MutableLiveData<>();
+    private final MutableLiveData<ErrorModel> errorModelLiveData = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
     protected final CompositeDisposable compositeDisposable = new CompositeDisposable();
     protected final ErrorHandler errorHandler = new ErrorHandler() {
         @Override
@@ -38,6 +39,18 @@ public class BaseViewModel extends ViewModel {
 
     public MutableLiveData<ErrorModel> getErrorModelLiveData() {
         return errorModelLiveData;
+    }
+
+    public MutableLiveData<Boolean> getIsLoading() {
+        return isLoading;
+    }
+
+    public void postLoading(boolean loading) {
+        isLoading.postValue(loading);
+    }
+
+    public void setLoading(boolean loading) {
+        isLoading.setValue(loading);
     }
 
     @Override

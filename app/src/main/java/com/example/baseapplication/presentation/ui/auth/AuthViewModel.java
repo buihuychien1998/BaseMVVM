@@ -15,6 +15,7 @@ import javax.inject.Inject;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import dagger.hilt.android.lifecycle.HiltViewModel;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 @HiltViewModel
@@ -44,7 +45,12 @@ class AuthViewModel extends BaseViewModel {
     public void getUserList() {
         authDataSource.getUserList()
             .subscribeOn(Schedulers.io())
-            .doOnSubscribe(compositeDisposable::add)
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe(disposable -> {
+                compositeDisposable.add(disposable);
+                postLoading(true);
+            })
+            .doOnTerminate(()->postLoading(false))
             .subscribeWith(new CallbackWrapper<List<User>>(errorHandler) {
 
                 @Override
